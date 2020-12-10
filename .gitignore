@@ -25,9 +25,6 @@ lib/
 stats.json
 cypress/
 bundles/
-typings/*
-!typings/styled-patch.d.ts
-cli/index.js
 
 /benchmark/revisions
 
