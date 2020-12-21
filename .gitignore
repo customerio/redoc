@@ -24,7 +24,6 @@ node_modules
 lib/
 stats.json
 cypress/
-bundles/
 
 /benchmark/revisions
 
