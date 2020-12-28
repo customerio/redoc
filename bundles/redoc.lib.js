@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "35783e91"));
+                    "0f4105d6"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -8956,7 +8956,7 @@ var ApiInfo_ApiInfoModel = /** @class */ (function () {
     };
     ApiInfoModel.prototype.getDownloadFileName = function () {
         if (!this.parser.specUrl) {
-            return 'swagger.json';
+            return 'cio_spec.json';
         }
         return undefined;
     };
@@ -13044,17 +13044,14 @@ var ApiInfo_ApiInfo = /** @class */ (function (_super) {
             external_react_["createElement"]("a", { href: 'mailto:' + info.contact.email }, info.contact.email)) || null;
         var terms = info.termsOfService && external_react_["createElement"](InfoSpan, null,
             external_react_["createElement"]("a", { href: info.termsOfService }, "Terms of Service")) || null;
-        var version = info.version && external_react_["createElement"]("span", null,
-            "(",
-            info.version,
-            ")") || null;
+        /** const version = (info.version && <span>({info.version})</span>) || null; */
+        /**
+        * Removed {version} from ApiHeader — was {info.title} {version}
+        */
         return external_react_["createElement"](Section, null,
             external_react_["createElement"](Row, null,
                 external_react_["createElement"](MiddlePanel, { className: "api-info" },
-                    external_react_["createElement"](ApiHeader, null,
-                        info.title,
-                        " ",
-                        version),
+                    external_react_["createElement"](ApiHeader, null, info.title),
                     !hideDownloadButton && external_react_["createElement"]("p", null,
                         "Download OpenAPI specification:",
                         external_react_["createElement"](DownloadButton, { download: downloadFilename || true, target: "_blank", href: downloadLink, onClick: this.handleDownloadClick }, "Download")),
