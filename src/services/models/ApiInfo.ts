@@ -42,7 +42,7 @@ export class ApiInfoModel implements OpenAPIInfo {
 
   private getDownloadFileName(): string | undefined {
     if (!this.parser.specUrl) {
-      return 'swagger.json';
+      return 'cio_spec.json';
     }
     return undefined;
   }
