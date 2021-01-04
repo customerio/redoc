@@ -34,15 +34,7 @@ export const Section = styled.div.attrs(props => ({
     (props.underlined &&
       `
     position: relative;
-
-    &:not(:last-of-type):after {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      display: block;
-      content: '';
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    }
+    
   `) ||
     ''}
 `;
