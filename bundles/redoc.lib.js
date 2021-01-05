@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "59923db3"));
+                    "1f8066a2"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -13716,7 +13716,7 @@ var SecurityRequirement_SecurityRequirements = /** @class */ (function (_super) 
         }
         return external_react_["createElement"](SecurityRequirement_Wrap, null,
             external_react_["createElement"](AuthHeaderColumn, null,
-                external_react_["createElement"](AuthHeader, null, "Authorizations: ")),
+                external_react_["createElement"](AuthHeader, null, "Authorization: ")),
             external_react_["createElement"](SecuritiesColumn, null, securities.map(function (security, idx) { return external_react_["createElement"](SecurityRequirement_SecurityRequirement, { key: idx, security: security }); })));
     };
     return SecurityRequirements;
