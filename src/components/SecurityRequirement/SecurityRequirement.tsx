@@ -70,7 +70,7 @@ export class SecurityRequirement extends React.PureComponent<SecurityRequirement
         {security.schemes.map(scheme => {
           return (
             <SecurityRequirementAndWrap key={scheme.id}>
-              <Link to={scheme.sectionId}>{scheme.id}</Link>
+              <Link to={scheme.sectionId}>{scheme.id.replace( /([A-Z])/g, " $1" )}</Link>
               {scheme.scopes.length > 0 && ' ('}
               {scheme.scopes.map(scope => (
                 <ScopeName key={scope}>{scope}</ScopeName>
@@ -123,7 +123,7 @@ export class SecurityRequirements extends React.PureComponent<SecurityRequiremen
     return (
       <Wrap>
         <AuthHeaderColumn>
-          <AuthHeader>Authorization: </AuthHeader>
+          <AuthHeader>Authorizations: </AuthHeader>
         </AuthHeaderColumn>
         <SecuritiesColumn>
           {securities.map((security, idx) => (
