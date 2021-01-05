@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "604b144e"));
+                    "59923db3"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -12777,7 +12777,7 @@ var SecuritySchemes_SecurityDefs = /** @class */ (function (_super) {
                 external_react_["createElement"](MiddlePanel, null,
                     external_react_["createElement"](H2, null,
                         external_react_["createElement"](ShareLink, { to: scheme.sectionId }),
-                        scheme.id),
+                        scheme.id.replace(/([A-Z])/g, " $1")),
                     external_react_["createElement"](Markdown_Markdown, { source: scheme.description || '' }),
                     external_react_["createElement"](StyledMarkdownBlock, null,
                         external_react_["createElement"]("table", { className: "security-details" },
@@ -13689,7 +13689,7 @@ var SecurityRequirement_SecurityRequirement = /** @class */ (function (_super) {
         var security = this.props.security;
         return external_react_["createElement"](SecurityRequirementOrWrap, null, security.schemes.map(function (scheme) {
             return external_react_["createElement"](SecurityRequirementAndWrap, { key: scheme.id },
-                external_react_["createElement"](linkify_Link, { to: scheme.sectionId }, scheme.id),
+                external_react_["createElement"](linkify_Link, { to: scheme.sectionId }, scheme.id.replace(/([A-Z])/g, " $1")),
                 scheme.scopes.length > 0 && ' (',
                 scheme.scopes.map(function (scope) { return external_react_["createElement"](ScopeName, { key: scope }, scope); }),
                 scheme.scopes.length > 0 && ') ');
@@ -13716,7 +13716,7 @@ var SecurityRequirement_SecurityRequirements = /** @class */ (function (_super) 
         }
         return external_react_["createElement"](SecurityRequirement_Wrap, null,
             external_react_["createElement"](AuthHeaderColumn, null,
-                external_react_["createElement"](AuthHeader, null, "Authorization: ")),
+                external_react_["createElement"](AuthHeader, null, "Authorizations: ")),
             external_react_["createElement"](SecuritiesColumn, null, securities.map(function (security, idx) { return external_react_["createElement"](SecurityRequirement_SecurityRequirement, { key: idx, security: security }); })));
     };
     return SecurityRequirements;
