@@ -45,7 +45,7 @@ export class Operation extends React.Component<OperationProps> {
         {(options) => (
           <OperationRow>
             <MiddlePanel>
-              <H2>
+              <H2 className='opTitle'>
                 <ShareLink to={operation.id} />
                 {summary} {deprecated && <Badge type="warning"> Deprecated </Badge>}
                 {isWebhook && <Badge type="primary"> Webhook </Badge>}
@@ -54,7 +54,7 @@ export class Operation extends React.Component<OperationProps> {
                 <Endpoint operation={operation} inverted={true} />
               )}
               {hasDescription && (
-                <Description>
+                <Description className='opDescription'>
                   {description !== undefined && <Markdown source={description} />}
                   {externalDocs && <ExternalDocumentation externalDocs={externalDocs} />}
                 </Description>

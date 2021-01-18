@@ -1217,7 +1217,7 @@ components:
       description: List of user object
       required: true
   securitySchemes:
-    PetstoreAuth:
+    Petstore-Auth:
       description: |
         Get access to data while protecting your account credentials.
         OAuth2 is also a safer and more secure way to give you access.
@@ -1228,7 +1228,7 @@ components:
           scopes:
             'write:pets': modify pets in your account
             'read:pets': read your pets
-    api_key:
+    api-key:
       description: >
         For this sample, you can use the api key `special-key` to test the
         authorization filters.

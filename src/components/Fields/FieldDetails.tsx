@@ -105,7 +105,7 @@ export class FieldDetails extends React.PureComponent<FieldProps, { patternShown
         {!renderDiscriminatorSwitch && <EnumValues type={schema.type} values={schema.enum} />}{' '}
         {renderedExamples}
         {<Extensions extensions={{ ...field.extensions, ...schema.extensions }} />}
-        <div>
+        <div className="propDescription">
           <Markdown compact={true} source={description} />
         </div>
         {schema.externalDocs && (

@@ -19,7 +19,7 @@ export class ResponseView extends React.Component<{ response: ResponseModel }> {
     const empty = headers.length === 0 && mimes.length === 0 && !description;
 
     return (
-      <div>
+      <div className='response'>
         <StyledResponseTitle
           onClick={this.toggle}
           type={type}

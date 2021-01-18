@@ -21,7 +21,7 @@ export class ParametersGroup extends React.PureComponent<ParametersGroupProps, a
     }
 
     return (
-      <div key={place}>
+      <div className="parameters" key={place}>
         <UnderlinedHeader>{place} Parameters</UnderlinedHeader>
         <PropertiesTable>
           <tbody>
