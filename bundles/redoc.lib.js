@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "1f8066a2"));
+                    "e14b16c5"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -12288,7 +12288,7 @@ var FieldDetails_FieldDetails = /** @class */ (function (_super) {
             ' ',
             renderedExamples,
             external_react_["createElement"](Extensions_Extensions, { extensions: Object(external_tslib_["__assign"])(Object(external_tslib_["__assign"])({}, field.extensions), schema.extensions) }),
-            external_react_["createElement"]("div", null,
+            external_react_["createElement"]("div", { className: "propDescription" },
                 external_react_["createElement"](Markdown_Markdown, { compact: true, source: description })),
             schema.externalDocs && external_react_["createElement"](ExternalDocumentation_ExternalDocumentation, { externalDocs: schema.externalDocs, compact: true }),
             renderDiscriminatorSwitch && renderDiscriminatorSwitch(this.props) || null);
@@ -12403,19 +12403,19 @@ var Field_Field = /** @class */ (function (_super) {
         var name = field.name, deprecated = field.deprecated, required = field.required, kind = field.kind;
         var withSubSchema = !field.schema.isPrimitive && !field.schema.isCircular;
         var expanded = field.expanded === undefined ? expandByDefault : field.expanded;
-        var paramName = withSubSchema ? external_react_["createElement"](ClickablePropertyNameCell, { className: deprecated ? 'deprecated' : '', kind: kind, title: name },
+        var paramName = withSubSchema ? external_react_["createElement"](ClickablePropertyNameCell, { className: deprecated ? 'deprecated' : 'parent propTitle', kind: kind, title: name },
             external_react_["createElement"](PropertyBullet, null),
             external_react_["createElement"]("button", { onClick: this.toggle, onKeyPress: this.handleKeyPress, "aria-label": "expand properties" },
                 external_react_["createElement"]("span", null, name),
                 external_react_["createElement"](ShelfIcon, { direction: expanded ? 'down' : 'right' })),
-            required && external_react_["createElement"](RequiredLabel, null, " required ")) : external_react_["createElement"](PropertyNameCell, { className: deprecated ? 'deprecated' : undefined, kind: kind, title: name },
+            required && external_react_["createElement"](RequiredLabel, null, " required ")) : external_react_["createElement"](PropertyNameCell, { className: deprecated ? 'deprecated' : 'propTitle', kind: kind, title: name },
             external_react_["createElement"](PropertyBullet, null),
             external_react_["createElement"]("span", null, name),
             required && external_react_["createElement"](RequiredLabel, null, " required "));
         return external_react_["createElement"](external_react_["Fragment"], null,
-            external_react_["createElement"]("tr", { className: isLast ? 'last ' + className : className },
+            external_react_["createElement"]("tr", { className: isLast ? 'last property ' + className : 'property ' + className },
                 paramName,
-                external_react_["createElement"](PropertyDetailsCell, null,
+                external_react_["createElement"](PropertyDetailsCell, { className: "propSchema" },
                     external_react_["createElement"](FieldDetails_FieldDetails, Object(external_tslib_["__assign"])({}, this.props)))),
             expanded && withSubSchema && external_react_["createElement"]("tr", { key: field.name + 'inner' },
                 external_react_["createElement"](PropertyCellWithInner, { colSpan: 2 },
@@ -12777,7 +12777,7 @@ var SecuritySchemes_SecurityDefs = /** @class */ (function (_super) {
                 external_react_["createElement"](MiddlePanel, null,
                     external_react_["createElement"](H2, null,
                         external_react_["createElement"](ShareLink, { to: scheme.sectionId }),
-                        scheme.id.replace(/([A-Z])/g, " $1")),
+                        scheme.id.replace(/-/g, " ")),
                     external_react_["createElement"](Markdown_Markdown, { source: scheme.description || '' }),
                     external_react_["createElement"](StyledMarkdownBlock, null,
                         external_react_["createElement"]("table", { className: "security-details" },
@@ -13347,10 +13347,10 @@ var Endpoint_Endpoint = /** @class */ (function (_super) {
         var _this = this;
         var _a = this.props, operation = _a.operation, inverted = _a.inverted, hideHostname = _a.hideHostname;
         var expanded = this.state.expanded; // TODO: highlight server variables, e.g. https://{user}.test.com
-        return external_react_["createElement"](OptionsContext.Consumer, null, function (options) { return external_react_["createElement"](OperationEndpointWrap, null,
+        return external_react_["createElement"](OptionsContext.Consumer, null, function (options) { return external_react_["createElement"](OperationEndpointWrap, { className: 'endpoint' },
             external_react_["createElement"](EndpointInfo, { onClick: _this.toggle, expanded: expanded, inverted: inverted },
                 external_react_["createElement"](HttpVerb, { type: operation.httpVerb, compact: _this.props.compact }, operation.httpVerb),
-                external_react_["createElement"](ServerRelativeURL, null, operation.path),
+                external_react_["createElement"](ServerRelativeURL, { className: 'path' }, operation.path),
                 external_react_["createElement"](ShelfIcon, { float: 'right', color: inverted ? 'black' : 'white', size: '20px', direction: expanded ? 'up' : 'down', style: {
                         marginRight: '-25px'
                     } })),
@@ -13386,7 +13386,7 @@ var ParametersGroup_ParametersGroup = /** @class */ (function (_super) {
         if (!parameters || !parameters.length) {
             return null;
         }
-        return external_react_["createElement"]("div", { key: place },
+        return external_react_["createElement"]("div", { className: "parameters", key: place },
             external_react_["createElement"](UnderlinedHeader, null,
                 place,
                 " Parameters"),
@@ -13623,7 +13623,7 @@ var Response_ResponseView = /** @class */ (function (_super) {
         var _a = this.props.response, headers = _a.headers, type = _a.type, summary = _a.summary, description = _a.description, code = _a.code, expanded = _a.expanded, content = _a.content;
         var mimes = content === undefined ? [] : content.mediaTypes.filter(function (mime) { return mime.schema !== undefined; });
         var empty = headers.length === 0 && mimes.length === 0 && !description;
-        return external_react_["createElement"]("div", null,
+        return external_react_["createElement"]("div", { className: 'response' },
             external_react_["createElement"](StyledResponseTitle, { onClick: this.toggle, type: type, empty: empty, title: summary || '', code: code, opened: expanded }),
             expanded && !empty && external_react_["createElement"](ResponseDetailsWrap, null,
                 external_react_["createElement"](ResponseDetails_ResponseDetails, { response: this.props.response })));
@@ -13689,7 +13689,7 @@ var SecurityRequirement_SecurityRequirement = /** @class */ (function (_super) {
         var security = this.props.security;
         return external_react_["createElement"](SecurityRequirementOrWrap, null, security.schemes.map(function (scheme) {
             return external_react_["createElement"](SecurityRequirementAndWrap, { key: scheme.id },
-                external_react_["createElement"](linkify_Link, { to: scheme.sectionId }, scheme.id.replace(/([A-Z])/g, " $1")),
+                external_react_["createElement"](linkify_Link, { to: scheme.sectionId }, scheme.id.replace(/-/g, " ")),
                 scheme.scopes.length > 0 && ' (',
                 scheme.scopes.map(function (scope) { return external_react_["createElement"](ScopeName, { key: scope }, scope); }),
                 scheme.scopes.length > 0 && ') ');
@@ -14104,14 +14104,14 @@ var Operation_Operation = /** @class */ (function (_super) {
         var hasDescription = !!(description || externalDocs);
         return external_react_["createElement"](OptionsContext.Consumer, null, function (options) { return external_react_["createElement"](OperationRow, null,
             external_react_["createElement"](MiddlePanel, null,
-                external_react_["createElement"](H2, null,
+                external_react_["createElement"](H2, { className: 'opTitle' },
                     external_react_["createElement"](ShareLink, { to: operation.id }),
                     summary,
                     " ",
                     deprecated && external_react_["createElement"](Badge, { type: "warning" }, " Deprecated "),
                     isWebhook && external_react_["createElement"](Badge, { type: "primary" }, " Webhook ")),
                 options.pathInMiddlePanel && !isWebhook && external_react_["createElement"](Endpoint_Endpoint, { operation: operation, inverted: true }),
-                hasDescription && external_react_["createElement"](Operation_Description, null,
+                hasDescription && external_react_["createElement"](Operation_Description, { className: 'opDescription' },
                     description !== undefined && external_react_["createElement"](Markdown_Markdown, { source: description }),
                     externalDocs && external_react_["createElement"](ExternalDocumentation_ExternalDocumentation, { externalDocs: externalDocs })),
                 external_react_["createElement"](Extensions_Extensions, { extensions: operation.extensions }),
