@@ -69,7 +69,7 @@ export class Endpoint extends React.Component<EndpointProps, EndpointState> {
                   : server.url;
                 const basePath = getBasePath(normalizedUrl);
                 return (
-                  <ServerItem key={normalizedUrl}>
+                  <ServerItem key={normalizedUrl} className={server.url.includes('-eu') ? 'eu-server' : 'us-server'}>
                     <Markdown source={server.description || ''} compact={true} />
                     <SelectOnClick>
                       <ServerUrl>

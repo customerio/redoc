@@ -27,23 +27,22 @@ export class RequestSamples extends React.Component<RequestSamplesProps> {
       (hasSamples && (
         <div>
           <RightPanelHeader> Request samples </RightPanelHeader>
-
           <Tabs defaultIndex={0}>
             <TabList hidden={hideTabList}>
               {samples.map(sample => (
-                <Tab className="exampleButton" key={sample.lang + '_' + (sample.label || '')}>
+                <Tab className='exampleButton' key={sample.lang + '_' + (sample.label || '')}>
                   {sample.label !== undefined ? sample.label : 
-                  sample.lang === 'Shell + Curl' ? sample.lang.slice(8) : 
-                  sample.lang === 'Node + Native' ? sample.lang.slice(0, 4) :
-                  sample.lang === 'Go + Native' ? sample.lang.slice(0, 2) :
-                  sample.lang === 'Ruby + Native' ? sample.lang.slice(0, 4) : 
-                  sample.lang === 'Python + Python3' ? sample.lang.slice(9) : 
-                  sample.lang === 'Javascript + Jquery' ? sample.lang.slice(0, 10) : sample.lang}
+                  sample.lang.toLowerCase().includes("curl") ? 'cURL' : 
+                  sample.lang.toLowerCase().includes("node") ? 'Node.js' :
+                  sample.lang.toLowerCase().includes("go") ? 'Go' :
+                  sample.lang.toLowerCase().includes("ruby") ? 'Ruby' : 
+                  sample.lang.toLowerCase().includes("python") ? 'Python 3' : 
+                  sample.lang.toLowerCase().includes("javascript") ? 'Javascript' : sample.lang}
                 </Tab>
               ))}
             </TabList>
             {samples.map(sample => (
-              <TabPanel key={sample.lang + '_' + (sample.label || '')}>
+              <TabPanel className='exampleCode' key={sample.lang + '_' + (sample.label || '')}>
                 {isPayloadSample(sample) ? (
                   <div>
                     <PayloadSamples content={sample.requestBodyContent} />

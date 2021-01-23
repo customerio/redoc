@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "e14b16c5"));
+                    "58cced4c"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -12413,9 +12413,9 @@ var Field_Field = /** @class */ (function (_super) {
             external_react_["createElement"]("span", null, name),
             required && external_react_["createElement"](RequiredLabel, null, " required "));
         return external_react_["createElement"](external_react_["Fragment"], null,
-            external_react_["createElement"]("tr", { className: isLast ? 'last property ' + className : 'property ' + className },
+            external_react_["createElement"]("tr", { className: isLast ? 'last property' + className : 'property' + className },
                 paramName,
-                external_react_["createElement"](PropertyDetailsCell, { className: "propSchema" },
+                external_react_["createElement"](PropertyDetailsCell, null,
                     external_react_["createElement"](FieldDetails_FieldDetails, Object(external_tslib_["__assign"])({}, this.props)))),
             expanded && withSubSchema && external_react_["createElement"]("tr", { key: field.name + 'inner' },
                 external_react_["createElement"](PropertyCellWithInner, { colSpan: 2 },
@@ -13357,7 +13357,7 @@ var Endpoint_Endpoint = /** @class */ (function (_super) {
             external_react_["createElement"](ServersOverlay, { expanded: expanded, "aria-hidden": !expanded }, operation.servers.map(function (server) {
                 var normalizedUrl = options.expandDefaultServerVariables ? expandDefaultServerVariables(server.url, server.variables) : server.url;
                 var basePath = getBasePath(normalizedUrl);
-                return external_react_["createElement"](ServerItem, { key: normalizedUrl },
+                return external_react_["createElement"](ServerItem, { key: normalizedUrl, className: server.url.includes('-eu') ? 'eu-server' : 'us-server' },
                     external_react_["createElement"](Markdown_Markdown, { source: server.description || '', compact: true }),
                     external_react_["createElement"](SelectOnClick_SelectOnClick, null,
                         external_react_["createElement"](ServerUrl, null,
@@ -14025,8 +14025,8 @@ var RequestSamples_RequestSamples = /** @class */ (function (_super) {
         return hasSamples && external_react_["createElement"]("div", null,
             external_react_["createElement"](RightPanelHeader, null, " Request samples "),
             external_react_["createElement"](Tabs, { defaultIndex: 0 },
-                external_react_["createElement"](external_react_tabs_["TabList"], { hidden: hideTabList }, samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["Tab"], { className: "exampleButton", key: sample.lang + '_' + (sample.label || '') }, sample.label !== undefined ? sample.label : sample.lang === 'Shell + Curl' ? sample.lang.slice(8) : sample.lang === 'Node + Native' ? sample.lang.slice(0, 4) : sample.lang === 'Go + Native' ? sample.lang.slice(0, 2) : sample.lang === 'Ruby + Native' ? sample.lang.slice(0, 4) : sample.lang === 'Python + Python3' ? sample.lang.slice(9) : sample.lang === 'Javascript + Jquery' ? sample.lang.slice(0, 10) : sample.lang); })),
-                samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["TabPanel"], { key: sample.lang + '_' + (sample.label || '') }, isPayloadSample(sample) ? external_react_["createElement"]("div", null,
+                external_react_["createElement"](external_react_tabs_["TabList"], { hidden: hideTabList }, samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["Tab"], { className: 'exampleButton', key: sample.lang + '_' + (sample.label || '') }, sample.label !== undefined ? sample.label : sample.lang.toLowerCase().includes("curl") ? 'cURL' : sample.lang.toLowerCase().includes("node") ? 'Node.js' : sample.lang.toLowerCase().includes("go") ? 'Go' : sample.lang.toLowerCase().includes("ruby") ? 'Ruby' : sample.lang.toLowerCase().includes("python") ? 'Python 3' : sample.lang.toLowerCase().includes("javascript") ? 'Javascript' : sample.lang); })),
+                samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["TabPanel"], { className: 'exampleCode', key: sample.lang + '_' + (sample.label || '') }, isPayloadSample(sample) ? external_react_["createElement"]("div", null,
                     external_react_["createElement"](PayloadSamples_PayloadSamples, { content: sample.requestBodyContent })) : external_react_["createElement"](SourceCode_SourceCodeWithCopy, { lang: sample.lang, source: sample.source })); }))) || null;
     };
     RequestSamples.contextType = OptionsContext;

@@ -85,6 +85,10 @@ x-tagGroups:
       - store_model
 paths:
   /pet:
+    servers:
+      - url: https://petstore.swagger.io
+        description: US
+      - url: https://petstore-eu.swagger.io
     parameters:
       - name: Accept-Language
         in: header
@@ -291,12 +295,19 @@ paths:
             schema:
               type: object
               properties:
-                name:
-                  description: Updated name of the pet
-                  type: string
-                status:
-                  description: Updated status of the pet
-                  type: string
+                pet:
+                  type: object
+                  properties:
+                    name:
+                      description: Updated name of the pet
+                      type: object
+                      properties:
+                        status:
+                          description: Updated status of the pet
+                          type: string
+                        a_thing:
+                          description: balh balh
+                          type: string
     delete:
       tags:
         - pet
