@@ -79,7 +79,7 @@ export class Field extends React.Component<FieldProps> {
 
     return (
       <>
-        <tr className={isLast ? 'last property' + className : 'property' + className}>
+        <tr className={isLast ? 'last property ' + className : 'property ' + className}>
           {paramName}
           <PropertyDetailsCell>
             <FieldDetails {...this.props} />

@@ -42,7 +42,7 @@ export class RequestSamples extends React.Component<RequestSamplesProps> {
               ))}
             </TabList>
             {samples.map(sample => (
-              <TabPanel className='exampleCode' key={sample.lang + '_' + (sample.label || '')}>
+              <TabPanel key={sample.lang + '_' + (sample.label || '')}>
                 {isPayloadSample(sample) ? (
                   <div>
                     <PayloadSamples content={sample.requestBodyContent} />

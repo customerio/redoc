@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "58cced4c"));
+                    "0ab9ab38"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -11757,7 +11757,7 @@ var SourceCode_SourceCodeWithCopy = /** @class */ (function (_super) {
         var _this = this;
         return external_react_["createElement"](CopyButtonWrapper_CopyButtonWrapper, { data: this.props.source }, function (_a) {
             var renderCopyButton = _a.renderCopyButton;
-            return external_react_["createElement"](SampleControlsWrap, null,
+            return external_react_["createElement"](SampleControlsWrap, { className: 'example' },
                 external_react_["createElement"](SampleControls, null, renderCopyButton()),
                 external_react_["createElement"](SourceCode_SourceCode, { lang: _this.props.lang, source: _this.props.source }));
         });
@@ -12413,7 +12413,7 @@ var Field_Field = /** @class */ (function (_super) {
             external_react_["createElement"]("span", null, name),
             required && external_react_["createElement"](RequiredLabel, null, " required "));
         return external_react_["createElement"](external_react_["Fragment"], null,
-            external_react_["createElement"]("tr", { className: isLast ? 'last property' + className : 'property' + className },
+            external_react_["createElement"]("tr", { className: isLast ? 'last property ' + className : 'property ' + className },
                 paramName,
                 external_react_["createElement"](PropertyDetailsCell, null,
                     external_react_["createElement"](FieldDetails_FieldDetails, Object(external_tslib_["__assign"])({}, this.props)))),
@@ -14026,7 +14026,7 @@ var RequestSamples_RequestSamples = /** @class */ (function (_super) {
             external_react_["createElement"](RightPanelHeader, null, " Request samples "),
             external_react_["createElement"](Tabs, { defaultIndex: 0 },
                 external_react_["createElement"](external_react_tabs_["TabList"], { hidden: hideTabList }, samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["Tab"], { className: 'exampleButton', key: sample.lang + '_' + (sample.label || '') }, sample.label !== undefined ? sample.label : sample.lang.toLowerCase().includes("curl") ? 'cURL' : sample.lang.toLowerCase().includes("node") ? 'Node.js' : sample.lang.toLowerCase().includes("go") ? 'Go' : sample.lang.toLowerCase().includes("ruby") ? 'Ruby' : sample.lang.toLowerCase().includes("python") ? 'Python 3' : sample.lang.toLowerCase().includes("javascript") ? 'Javascript' : sample.lang); })),
-                samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["TabPanel"], { className: 'exampleCode', key: sample.lang + '_' + (sample.label || '') }, isPayloadSample(sample) ? external_react_["createElement"]("div", null,
+                samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["TabPanel"], { key: sample.lang + '_' + (sample.label || '') }, isPayloadSample(sample) ? external_react_["createElement"]("div", null,
                     external_react_["createElement"](PayloadSamples_PayloadSamples, { content: sample.requestBodyContent })) : external_react_["createElement"](SourceCode_SourceCodeWithCopy, { lang: sample.lang, source: sample.source })); }))) || null;
     };
     RequestSamples.contextType = OptionsContext;
