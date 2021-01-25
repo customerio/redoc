@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "0ab9ab38"));
+                    "c96faab4"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -14708,6 +14708,11 @@ var Redoc_Redoc = /** @class */ (function (_super) {
                     external_react_["createElement"](RedocWrap, { className: "redoc-wrap" },
                         external_react_["createElement"](StickyResponsiveSidebar_StickyResponsiveSidebar, { menu: menu, className: "menu-content" },
                             external_react_["createElement"](ApiLogo_ApiLogo, { info: spec.info }),
+                            external_react_["createElement"]("div", { className: 'region-selector' },
+                                "Region: \u00A0",
+                                external_react_["createElement"]("button", { type: 'button', id: 'us-server', value: 'us-server' }, "US"),
+                                " /",
+                                external_react_["createElement"]("button", { type: 'button', id: 'eu-server', value: 'eu-server' }, "EU")),
                             !options.disableSearch && external_react_["createElement"](SearchBox_SearchBox, { search: search, marker: marker, getItemById: menu.getItemById, onActivate: menu.activateAndScroll }) || null,
                             external_react_["createElement"](SideMenu_SideMenu, { menu: menu })),
                         external_react_["createElement"](ApiContentWrap, { className: "api-content" },

@@ -44,6 +44,11 @@ export class Redoc extends React.Component<RedocProps> {
             <RedocWrap className="redoc-wrap">
               <StickyResponsiveSidebar menu={menu} className="menu-content">
                 <ApiLogo info={spec.info} />
+                <div className='region-selector'>
+                  Region: &nbsp;
+                    <button type='button' id='us-server' value='us-server'>US</button> / 
+                    <button type='button' id='eu-server' value='eu-server'>EU</button>
+                </div>
                 {(!options.disableSearch && (
                   <SearchBox
                     search={search!}
