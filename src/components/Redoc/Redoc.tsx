@@ -46,8 +46,10 @@ export class Redoc extends React.Component<RedocProps> {
                 <ApiLogo info={spec.info} />
                 <div className='region-selector'>
                   Region: &nbsp;
-                    <button type='button' id='us-server' value='us-server'>US</button> / 
-                    <button type='button' id='eu-server' value='eu-server'>EU</button>
+                    <select name='region' id='regions'>
+                      <option value='us'>US</option>
+                      <option value='eu'>EU</option>
+                    </select>
                 </div>
                 {(!options.disableSearch && (
                   <SearchBox

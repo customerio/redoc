@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "c96faab4"));
+                    "4772f888"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -14710,9 +14710,9 @@ var Redoc_Redoc = /** @class */ (function (_super) {
                             external_react_["createElement"](ApiLogo_ApiLogo, { info: spec.info }),
                             external_react_["createElement"]("div", { className: 'region-selector' },
                                 "Region: \u00A0",
-                                external_react_["createElement"]("button", { type: 'button', id: 'us-server', value: 'us-server' }, "US"),
-                                " /",
-                                external_react_["createElement"]("button", { type: 'button', id: 'eu-server', value: 'eu-server' }, "EU")),
+                                external_react_["createElement"]("select", { name: 'region', id: 'regions' },
+                                    external_react_["createElement"]("option", { value: 'us' }, "US"),
+                                    external_react_["createElement"]("option", { value: 'eu' }, "EU"))),
                             !options.disableSearch && external_react_["createElement"](SearchBox_SearchBox, { search: search, marker: marker, getItemById: menu.getItemById, onActivate: menu.activateAndScroll }) || null,
                             external_react_["createElement"](SideMenu_SideMenu, { menu: menu })),
                         external_react_["createElement"](ApiContentWrap, { className: "api-content" },
