@@ -27,11 +27,10 @@ export class RequestSamples extends React.Component<RequestSamplesProps> {
       (hasSamples && (
         <div>
           <RightPanelHeader> Request samples </RightPanelHeader>
-
           <Tabs defaultIndex={0}>
             <TabList hidden={hideTabList}>
               {samples.map(sample => (
-                <Tab className="exampleButton" key={sample.lang + '_' + (sample.label || '')}>
+                <Tab className='exampleButton' key={sample.lang + '_' + (sample.label || '')}>
                   {sample.label !== undefined ? sample.label : 
                   sample.lang.toLowerCase().includes("curl") ? 'cURL' : 
                   sample.lang.toLowerCase().includes("node") ? 'Node.js' :

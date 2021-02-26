@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "58cced4c"));
+                    "83e7652c"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -12415,7 +12415,7 @@ var Field_Field = /** @class */ (function (_super) {
         return external_react_["createElement"](external_react_["Fragment"], null,
             external_react_["createElement"]("tr", { className: isLast ? 'last property ' + className : 'property ' + className },
                 paramName,
-                external_react_["createElement"](PropertyDetailsCell, { className: "propSchema" },
+                external_react_["createElement"](PropertyDetailsCell, null,
                     external_react_["createElement"](FieldDetails_FieldDetails, Object(external_tslib_["__assign"])({}, this.props)))),
             expanded && withSubSchema && external_react_["createElement"]("tr", { key: field.name + 'inner' },
                 external_react_["createElement"](PropertyCellWithInner, { colSpan: 2 },
@@ -14025,7 +14025,7 @@ var RequestSamples_RequestSamples = /** @class */ (function (_super) {
         return hasSamples && external_react_["createElement"]("div", null,
             external_react_["createElement"](RightPanelHeader, null, " Request samples "),
             external_react_["createElement"](Tabs, { defaultIndex: 0 },
-                external_react_["createElement"](external_react_tabs_["TabList"], { hidden: hideTabList }, samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["Tab"], { className: "exampleButton", key: sample.lang + '_' + (sample.label || '') }, sample.label !== undefined ? sample.label : sample.lang.toLowerCase().includes("curl") ? 'cURL' : sample.lang.toLowerCase().includes("node") ? 'Node.js' : sample.lang.toLowerCase().includes("go") ? 'Go' : sample.lang.toLowerCase().includes("ruby") ? 'Ruby' : sample.lang.toLowerCase().includes("python") ? 'Python 3' : sample.lang.toLowerCase().includes("javascript") ? 'Javascript' : sample.lang); })),
+                external_react_["createElement"](external_react_tabs_["TabList"], { hidden: hideTabList }, samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["Tab"], { className: 'exampleButton', key: sample.lang + '_' + (sample.label || '') }, sample.label !== undefined ? sample.label : sample.lang.toLowerCase().includes("curl") ? 'cURL' : sample.lang.toLowerCase().includes("node") ? 'Node.js' : sample.lang.toLowerCase().includes("go") ? 'Go' : sample.lang.toLowerCase().includes("ruby") ? 'Ruby' : sample.lang.toLowerCase().includes("python") ? 'Python 3' : sample.lang.toLowerCase().includes("javascript") ? 'Javascript' : sample.lang); })),
                 samples.map(function (sample) { return external_react_["createElement"](external_react_tabs_["TabPanel"], { key: sample.lang + '_' + (sample.label || '') }, isPayloadSample(sample) ? external_react_["createElement"]("div", null,
                     external_react_["createElement"](PayloadSamples_PayloadSamples, { content: sample.requestBodyContent })) : external_react_["createElement"](SourceCode_SourceCodeWithCopy, { lang: sample.lang, source: sample.source })); }))) || null;
     };
@@ -14708,6 +14708,11 @@ var Redoc_Redoc = /** @class */ (function (_super) {
                     external_react_["createElement"](RedocWrap, { className: "redoc-wrap" },
                         external_react_["createElement"](StickyResponsiveSidebar_StickyResponsiveSidebar, { menu: menu, className: "menu-content" },
                             external_react_["createElement"](ApiLogo_ApiLogo, { info: spec.info }),
+                            external_react_["createElement"]("div", { className: 'region-selector' },
+                                "Region: \u00A0",
+                                external_react_["createElement"]("select", { name: 'region', id: 'regions' },
+                                    external_react_["createElement"]("option", { value: 'us' }, "US"),
+                                    external_react_["createElement"]("option", { value: 'eu' }, "EU"))),
                             !options.disableSearch && external_react_["createElement"](SearchBox_SearchBox, { search: search, marker: marker, getItemById: menu.getItemById, onActivate: menu.activateAndScroll }) || null,
                             external_react_["createElement"](SideMenu_SideMenu, { menu: menu })),
                         external_react_["createElement"](ApiContentWrap, { className: "api-content" },
