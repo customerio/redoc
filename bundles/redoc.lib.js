@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "a810adb5"));
+                    "36a38dae"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -13357,7 +13357,7 @@ var Endpoint_Endpoint = /** @class */ (function (_super) {
             external_react_["createElement"](ServersOverlay, { expanded: expanded, "aria-hidden": !expanded }, operation.servers.map(function (server) {
                 var normalizedUrl = options.expandDefaultServerVariables ? expandDefaultServerVariables(server.url, server.variables) : server.url;
                 var basePath = getBasePath(normalizedUrl);
-                return external_react_["createElement"](ServerItem, { key: normalizedUrl, className: server.url.includes('-eu') ? 'eu-server' : 'us-server' },
+                return external_react_["createElement"](ServerItem, { key: normalizedUrl },
                     external_react_["createElement"](Markdown_Markdown, { source: server.description || '', compact: true }),
                     external_react_["createElement"](SelectOnClick_SelectOnClick, null,
                         external_react_["createElement"](ServerUrl, null,
