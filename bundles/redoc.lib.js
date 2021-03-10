@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "83e7652c"));
+                    "e27d91f0"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -14102,7 +14102,7 @@ var Operation_Operation = /** @class */ (function (_super) {
         var operation = this.props.operation;
         var summary = operation.name, description = operation.description, deprecated = operation.deprecated, externalDocs = operation.externalDocs, isWebhook = operation.isWebhook;
         var hasDescription = !!(description || externalDocs);
-        return external_react_["createElement"](OptionsContext.Consumer, null, function (options) { return external_react_["createElement"](OperationRow, null,
+        return external_react_["createElement"](OptionsContext.Consumer, null, function (options) { return external_react_["createElement"](OperationRow, { className: 'opContent' },
             external_react_["createElement"](MiddlePanel, null,
                 external_react_["createElement"](H2, { className: 'opTitle' },
                     external_react_["createElement"](ShareLink, { to: operation.id }),

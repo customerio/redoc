@@ -43,7 +43,7 @@ export class Operation extends React.Component<OperationProps> {
     return (
       <OptionsContext.Consumer>
         {(options) => (
-          <OperationRow>
+          <OperationRow className='opContent'>
             <MiddlePanel>
               <H2 className='opTitle'>
                 <ShareLink to={operation.id} />
