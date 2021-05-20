@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "e27d91f0"));
+                    "eb96dc5f"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -13386,7 +13386,7 @@ var ParametersGroup_ParametersGroup = /** @class */ (function (_super) {
         if (!parameters || !parameters.length) {
             return null;
         }
-        return external_react_["createElement"]("div", { className: "parameters", key: place },
+        return external_react_["createElement"]("div", { className: place == 'query' ? 'queryParams' : place == 'path' ? 'pathParams' : place == 'cookie' ? 'cookieParams' : 'headerParams', key: place },
             external_react_["createElement"](UnderlinedHeader, null,
                 place,
                 " Parameters"),
@@ -13623,7 +13623,7 @@ var Response_ResponseView = /** @class */ (function (_super) {
         var _a = this.props.response, headers = _a.headers, type = _a.type, summary = _a.summary, description = _a.description, code = _a.code, expanded = _a.expanded, content = _a.content;
         var mimes = content === undefined ? [] : content.mediaTypes.filter(function (mime) { return mime.schema !== undefined; });
         var empty = headers.length === 0 && mimes.length === 0 && !description;
-        return external_react_["createElement"]("div", { className: 'response' },
+        return external_react_["createElement"]("div", { className: type == '200' ? '200response' : 'response' },
             external_react_["createElement"](StyledResponseTitle, { onClick: this.toggle, type: type, empty: empty, title: summary || '', code: code, opened: expanded }),
             expanded && !empty && external_react_["createElement"](ResponseDetailsWrap, null,
                 external_react_["createElement"](ResponseDetails_ResponseDetails, { response: this.props.response })));
