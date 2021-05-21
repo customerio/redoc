@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "d10680f6"));
+                    "3d864699"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -13623,7 +13623,7 @@ var Response_ResponseView = /** @class */ (function (_super) {
         var _a = this.props.response, headers = _a.headers, type = _a.type, summary = _a.summary, description = _a.description, code = _a.code, expanded = _a.expanded, content = _a.content;
         var mimes = content === undefined ? [] : content.mediaTypes.filter(function (mime) { return mime.schema !== undefined; });
         var empty = headers.length === 0 && mimes.length === 0 && !description;
-        return external_react_["createElement"]("div", { className: code == '200' ? '200response' : 'response' },
+        return external_react_["createElement"]("div", { className: code ? code + 'response' : 'response' },
             external_react_["createElement"](StyledResponseTitle, { onClick: this.toggle, type: type, empty: empty, title: summary || '', code: code, opened: expanded }),
             expanded && !empty && external_react_["createElement"](ResponseDetailsWrap, null,
                 external_react_["createElement"](ResponseDetails_ResponseDetails, { response: this.props.response })));
