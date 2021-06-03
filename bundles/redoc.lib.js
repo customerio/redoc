@@ -7686,7 +7686,7 @@ var ErrorBoundary_ErrorBoundary = /** @class */ (function (_super) {
                 external_react_["createElement"]("br", null),
                 external_react_["createElement"]("small", null,
                     " Commit: ",
-                    "3d864699"));
+                    "be3dd9dd"));
         }
         return external_react_["Children"].only(this.props.children);
     };
@@ -11016,6 +11016,7 @@ var linkify_Link = /** @class */ (function (_super) {
             ) {
                 event.preventDefault();
                 history.replace(_this.props.to);
+                navigator.clipboard.writeText(window.location.origin + window.location.pathname + '#' + _this.props.to);
             }
         };
         return _this;

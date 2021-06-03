@@ -45,6 +45,7 @@ export class Link extends React.Component<{ to: string; className?: string; chil
     ) {
       event.preventDefault();
       history.replace(this.props.to);
+      navigator.clipboard.writeText(window.location.origin + window.location.pathname + '#' + this.props.to);
     }
   };
 
