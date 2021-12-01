@@ -41,14 +41,16 @@ export interface RedocRawOptions {
   expandDefaultServerVariables?: boolean;
   maxDisplayedEnumValues?: number;
   ignoreNamedSchemas?: string[] | string;
+  hideSchemaPattern?: boolean;
+  generatedPayloadSamplesMaxDepth?: number;
 }
 
-function argValueToBoolean(val?: string | boolean, defaultValue?: boolean): boolean {
+export function argValueToBoolean(val?: string | boolean, defaultValue?: boolean): boolean {
   if (val === undefined) {
     return defaultValue || false;
   }
   if (typeof val === 'string') {
-    return val === 'false' ? false : true;
+    return val !== 'false';
   }
   return val;
 }
@@ -70,7 +72,7 @@ export class RedocNormalizedOptions {
     }
     if (typeof value === 'string') {
       const res = {};
-      value.split(',').forEach((code) => {
+      value.split(',').forEach(code => {
         res[code.trim()] = true;
       });
       return res;
@@ -136,7 +138,7 @@ export class RedocNormalizedOptions {
       case 'false':
         return false;
       default:
-        return value.split(',').map((ext) => ext.trim());
+        return value.split(',').map(ext => ext.trim());
     }
   }
 
@@ -160,6 +162,16 @@ export class RedocNormalizedOptions {
       return Math.ceil(Number(level));
     }
     return 2;
+  }
+
+  private static normalizeGeneratedPayloadSamplesMaxDepth(
+    value?: number | string | undefined,
+  ): number {
+    if (!isNaN(Number(value))) {
+      return Math.max(0, Number(value));
+    }
+
+    return 10;
   }
 
   theme: ResolvedThemeInterface;
@@ -194,6 +206,8 @@ export class RedocNormalizedOptions {
   maxDisplayedEnumValues?: number;
 
   ignoreNamedSchemas: Set<string>;
+  hideSchemaPattern: boolean;
+  generatedPayloadSamplesMaxDepth: number;
 
   constructor(raw: RedocRawOptions, defaults: RedocRawOptions = {}) {
     raw = { ...defaults, ...raw };
@@ -250,7 +264,14 @@ export class RedocNormalizedOptions {
 
     this.expandDefaultServerVariables = argValueToBoolean(raw.expandDefaultServerVariables);
     this.maxDisplayedEnumValues = argValueToNumber(raw.maxDisplayedEnumValues);
-    const ignoreNamedSchemas = Array.isArray(raw.ignoreNamedSchemas) ? raw.ignoreNamedSchemas : raw.ignoreNamedSchemas?.split(',').map(s => s.trim());
+    const ignoreNamedSchemas = Array.isArray(raw.ignoreNamedSchemas)
+      ? raw.ignoreNamedSchemas
+      : raw.ignoreNamedSchemas?.split(',').map(s => s.trim());
     this.ignoreNamedSchemas = new Set(ignoreNamedSchemas);
+    this.hideSchemaPattern = argValueToBoolean(raw.hideSchemaPattern);
+    this.generatedPayloadSamplesMaxDepth =
+      RedocNormalizedOptions.normalizeGeneratedPayloadSamplesMaxDepth(
+        raw.generatedPayloadSamplesMaxDepth,
+      );
   }
 }
