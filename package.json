@@ -58,7 +58,7 @@
     "license-check": "license-checker --production --onlyAllow 'MIT;ISC;Apache-2.0;BSD;BSD-2-Clause;BSD-3-Clause;CC-BY-4.0;Python-2.0' --summary",
     "docker:build": "docker build -f config/docker/Dockerfile -t redoc .",
     "prepare": "husky install",
-    "pre-commit": "pretty-quick --staged && npm run lint"
+    "pre-commit": "pretty-quick --staged"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.9.0",
