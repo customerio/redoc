@@ -52,7 +52,7 @@ export class ApiInfoModel implements OpenAPIInfo {
 
   private getDownloadFileName(): string | undefined {
     if (!this.parser.specUrl && !this.options.downloadDefinitionUrl) {
-      return this.options.downloadFileName || 'openapi.json';
+      return this.options.downloadFileName || 'cio_spec.json';
     }
     return this.options.downloadFileName;
   }

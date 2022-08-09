@@ -42,6 +42,7 @@ export function Link(props: { to: string; className?: string; children?: any }) 
     (event: React.MouseEvent<HTMLAnchorElement>) => {
       if (!store) return;
       navigate(store.menu.history, event, props.to);
+      navigator.clipboard.writeText(window.location.origin + window.location.pathname + '#' + this.props.to);
     },
     [store, props.to],
   );

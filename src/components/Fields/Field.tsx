@@ -65,7 +65,7 @@ export class Field extends React.Component<FieldProps> {
 
     const paramName = withSubSchema ? (
       <ClickablePropertyNameCell
-        className={deprecated ? 'deprecated' : ''}
+        className={deprecated ? 'deprecated' : 'parent propTitle'}
         kind={kind}
         title={name}
       >
@@ -81,7 +81,7 @@ export class Field extends React.Component<FieldProps> {
         {labels}
       </ClickablePropertyNameCell>
     ) : (
-      <PropertyNameCell className={deprecated ? 'deprecated' : undefined} kind={kind} title={name}>
+      <PropertyNameCell className={deprecated ? 'deprecated' : 'propTitle'} kind={kind} title={name}>
         <PropertyBullet />
         <span className="property-name">{name}</span>
         {labels}
@@ -90,7 +90,7 @@ export class Field extends React.Component<FieldProps> {
 
     return (
       <>
-        <tr className={isLast ? 'last ' + className : className}>
+        <tr className={isLast ? 'last property ' + className : 'property ' + className}>
           {paramName}
           <PropertyDetailsCell>
             <FieldDetails {...this.props} />

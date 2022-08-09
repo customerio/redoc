@@ -1,5 +1,4 @@
 ### Linux ###
-*~
 
 # KDE directory preferences
 .directory
@@ -21,6 +20,8 @@ npm-debug.log*
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
 
+<<<<<<< HEAD
+=======
 lib/
 stats.json
 cypress/
@@ -30,6 +31,7 @@ typings/*
 cli/index.js
 cli/__test__/*/**/*.html
 
+>>>>>>> 0aafee113102be1439313bba302e2deadf6e2f84
 /benchmark/revisions
 
 /coverage

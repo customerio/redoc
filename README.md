@@ -1,3 +1,19 @@
+## Customer.io Folks Look Here!
+
+This is a fork of Redoc specific to Customer.io. We use this module as a part of our API docs.  
+
+So you want to edit the API doc styles? 
+
+1. Edit typescript files under `/src`.
+1. Run `bundle` — this builds the javascript that gets bundled with the CLI module that we use in `marketing-site-experiments`
+1. Run `compile:cli`
+1. Commit/push changes.
+1. `cd cli && gitpkg publish`
+1. Check that the published package matches what we use in customerio/marketing-site-experiments `package.json`. If so, go ahead and make your API changes, and you'll see your API changes. 
+
+## [Live demo](http://redocly.github.io/redoc/)
+
+[<img alt="Deploy to Github" src="http://i.imgur.com/YZmaqk3.png" height="60px">](https://github.com/Rebilly/generator-openapi-repo#generator-openapi-repo--) [<img alt="ReDoc as a service" src="http://i.imgur.com/edqdCv6.png" height="60px">](https://redoc.ly) [<img alt="Customization services" src="http://i.imgur.com/c4sUF7M.png" height="60px">](https://redoc.ly/#services)
 <div align="center">
   <img alt="Redoc logo" src="https://raw.githubusercontent.com/Redocly/redoc/master//docs/images/redoc.png" width="400px" />
 

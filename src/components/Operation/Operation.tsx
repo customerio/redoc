@@ -34,9 +34,9 @@ export const Operation = observer(({ operation }: OperationProps): JSX.Element =
   return (
     <OptionsContext.Consumer>
       {options => (
-        <Row {...{ [SECTION_ATTR]: operation.operationHash }} id={operation.operationHash}>
+        <Row {...{ [SECTION_ATTR]: operation.operationHash }} id={operation.operationHash} className='opContent'>
           <MiddlePanel>
-            <H2>
+            <H2 className='opTitle'>
               <ShareLink to={operation.id} />
               {summary} {deprecated && <Badge type="warning"> Deprecated </Badge>}
               {isWebhook && (
@@ -50,7 +50,7 @@ export const Operation = observer(({ operation }: OperationProps): JSX.Element =
               <Endpoint operation={operation} inverted={true} />
             )}
             {hasDescription && (
-              <Description>
+              <Description className='opDescription'>
                 {description !== undefined && <Markdown source={description} />}
                 {externalDocs && <ExternalDocumentation externalDocs={externalDocs} />}
               </Description>

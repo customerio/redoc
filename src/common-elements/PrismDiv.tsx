@@ -2,122 +2,172 @@ import styled, { extensionsHook } from '../styled-components';
 
 export const PrismDiv = styled.div`
   /**
-  * Based on prism-dark.css
-  */
+ * CIO Dark theme
+ * 
+ * bgPrimary    #23232f
+ * bgSecondary  #343446
+ * 
+ * text01       #ffffff
+ * text02       #c7c7d4
+ * text03       #a7a8b7
+ * 
+ * purple       #c4a8ff
+ * teal         #10cca6
+ * yellow       #f5d44e
+ * blue         #00c9e3
+ * raspberry    #ff95ca
+ * clementine   #ff9e5e
+ * 
+ * greenBg      #156352
+ * greenFg      #e6faf3
+ * redBg        #69002c
+ * redFg        #ffedf0
+ */
 
+  /* Set the main properties of the code, code blocks, and inline code */
   code[class*='language-'],
   pre[class*='language-'] {
-    /* color: white;
-    background: none; */
-    text-shadow: 0 -0.1em 0.2em black;
+    background: #23232f;
+    color: #ffffff;
+    font-family: Monaco, Menlo, 'Andale Mono', 'Ubuntu Mono', monospace; /* this is the default */
+    /* The following properties are standard, please leave them as they are */
+    font-size: 1em;
+    direction: ltr;
     text-align: left;
     white-space: pre;
     word-spacing: normal;
     word-break: normal;
-    word-wrap: normal;
     line-height: 1.5;
-
+    /* The default is 4, but you could change it if you really, really want to */
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
-
+    /* The following properties are also standard */
     -webkit-hyphens: none;
     -moz-hyphens: none;
     -ms-hyphens: none;
     hyphens: none;
   }
 
-  @media print {
-    code[class*='language-'],
-    pre[class*='language-'] {
-      text-shadow: none;
-    }
+  /* Optional: What the code looks like when highlighted */
+  code[class*='language-']::-moz-selection,
+  code[class*='language-'] ::-moz-selection,
+  pre[class*='language-']::-moz-selection,
+  pre[class*='language-'] ::-moz-selection {
+    background: #343446;
+    /* color: unset; */
   }
 
-  /* Code blocks */
-  pre[class*='language-'] {
-    padding: 1em;
-    margin: 0.5em 0;
-    overflow: auto;
+  code[class*='language-']::selection,
+  code[class*='language-'] ::selection,
+  pre[class*='language-']::selection,
+  pre[class*='language-'] ::selection {
+    background: #343446;
+    /* color: unset; */
   }
+
+  /* Properties specific to code blocks */
+  pre[class*='language-'] {
+    padding: 1em; /* this is standard */
+    margin: 0.5em 0; /* this is the default */
+    overflow: auto; /* this is standard */
+    /* border-radius: unset; */
+  }
+
+  /* Properties specific to inline code */
+  :not(pre) > code[class*='language-'] {
+    padding: 0.1em; /* this is the default */
+    /* border-radius: unset; */
+    white-space: normal; /* this is standard */
+  }
+
+  /**
+ * These are the minimum tokens you must style, you can rearrange them and/or style more tokens as you want
+ * The concepts behind these standard tokens, as well as some examples, can be found here: https://prismjs.com/tokens.html
+ */
 
   .token.comment,
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: hsl(30, 20%, 50%);
+    color: #a7a8b7;
   }
 
   .token.punctuation {
-    opacity: 0.7;
+    color: #ffffff;
   }
 
   .namespace {
     opacity: 0.7;
   }
 
-  .token.property,
+  .token.property {
+    color: #ffffff;
+  }
+
   .token.tag,
-  .token.number,
   .token.constant,
-  .token.symbol {
-    color: #4a8bb3;
+  .token.symbol,
+  .token.deleted {
+    color: #f5d44e;
   }
 
   .token.boolean {
-    color: #e64441;
+    color: #f5d44e;
+  }
+
+  .token.number {
+    color: #00c9e3;
+  }
+
+  .token.attr-name {
+    color: #ff95ca;
   }
 
   .token.selector,
-  .token.attr-name,
   .token.string,
   .token.char,
   .token.builtin,
   .token.inserted {
-    color: #a0fbaa;
-    & + a,
-    & + a:visited {
-      color: #4ed2ba;
-      text-decoration: underline;
-    }
-  }
-
-  .token.property.string {
-    color: white;
+    color: #10cca6;
   }
 
   .token.operator,
   .token.entity,
   .token.url,
+  .language-css .token.string,
+  .style .token.string,
   .token.variable {
-    color: hsl(40, 90%, 60%);
+    color: #10cca6;
   }
 
   .token.atrule,
   .token.attr-value,
+  .token.function,
+  .token.class-name {
+    color: #c4a8ff;
+  }
+
   .token.keyword {
-    color: hsl(350, 40%, 70%);
+    color: #ff95ca;
   }
 
   .token.regex,
   .token.important {
-    color: #e90;
+    color: #ff9e5e;
   }
 
   .token.important,
   .token.bold {
     font-weight: bold;
   }
+
   .token.italic {
     font-style: italic;
   }
 
   .token.entity {
     cursor: help;
-  }
-
-  .token.deleted {
-    color: red;
   }
 
   ${extensionsHook('Prism')};

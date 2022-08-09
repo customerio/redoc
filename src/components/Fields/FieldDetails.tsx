@@ -98,7 +98,7 @@ export const FieldDetailsComponent = observer((props: FieldProps) => {
       )}{' '}
       {renderedExamples}
       <Extensions extensions={{ ...extensions, ...schema.extensions }} />
-      <div>
+      <div className="propDescription">
         <Markdown compact={true} source={description} />
       </div>
       {schema.externalDocs && (

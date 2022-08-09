@@ -354,7 +354,7 @@ async function getPageHTML(
   return template({
     redocHTML: `
     <div id="redoc">${(ssr && html) || ''}</div>
-    <script>
+    <script id="spec">
     ${(ssr && `const __redoc_state = ${sanitizeJSONString(JSON.stringify(state))};`) || ''}
 
     var container = document.getElementById('redoc');
