@@ -27,7 +27,7 @@ jobs:
             npm-${{ hashFiles('package-lock.json') }}
             npm-
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@b6385f457e254eddd5009a9a0ecd54bbc1dae04f # v1.7.0
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
