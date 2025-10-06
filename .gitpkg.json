@@ -1,0 +1,32 @@
+{
+  "name": "redoc",
+  "version": "2.5.1-custom",
+  "description": "ReDoc with custom region selector and styling hooks",
+  "main": "bundles/redoc.lib.js",
+  "browser": "bundles/redoc.standalone.js",
+  "types": "typings/index.d.ts",
+  "files": ["bundles/", "typings/", "package.json", "README.md"],
+  "keywords": [
+    "OpenAPI",
+    "OpenAPI Specification",
+    "Swagger",
+    "JSON-Schema",
+    "API",
+    "REST",
+    "documentation",
+    "React.js"
+  ],
+  "author": "Roman Hotsiy <gotsijroman@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Redocly/redoc"
+  },
+  "peerDependencies": {
+    "core-js": "^3.1.4",
+    "mobx": "^6.0.4",
+    "react": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "styled-components": "^4.1.1 || ^5.1.1 || ^6.0.5"
+  }
+}

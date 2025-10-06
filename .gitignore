@@ -24,9 +24,14 @@ node_modules
 lib/
 stats.json
 cypress/
-bundles/
+bundles/*
+!bundles/redoc.lib.js
+!bundles/redoc.standalone.js
+!bundles/*.LICENSE.txt
 typings/*
 !typings/styled-patch.d.ts
+!typings/index.d.ts
+!typings/**/*.d.ts
 
 /benchmark/revisions
 
