@@ -1,9 +1,9 @@
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
-import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import { resolve } from 'path';
 import * as webpack from 'webpack';
-import { webpackIgnore } from '../config/webpack-utils';
+import { webpackIgnore } from '../config/webpack-utils.js';
 
 const VERSION = JSON.stringify(require('../package.json').version);
 const REVISION = JSON.stringify(

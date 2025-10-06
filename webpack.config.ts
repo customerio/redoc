@@ -1,8 +1,8 @@
 /* tslint:disable:no-implicit-dependencies */
-import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as webpack from 'webpack';
 import * as path from 'path';
-import { webpackIgnore } from './config/webpack-utils';
+import { webpackIgnore } from './config/webpack-utils.js';
 
 const nodeExternals = require('webpack-node-externals')({
   // bundle in modules that need transpiling + non-js (e.g. css)
