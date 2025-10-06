@@ -28,6 +28,9 @@
   "main": "bundles/redoc.lib.js",
   "browser": "bundles/redoc.browser.lib.js",
   "types": "typings/index.d.ts",
+  "bin": {
+    "redoc-cli": "./cli/index.js"
+  },
   "scripts": {
     "start": "webpack serve --mode=development --env playground --hot --config demo/webpack.config.ts",
     "start:prod": "webpack serve --env playground --mode=production --config demo/webpack.config.ts",
@@ -45,6 +48,10 @@
     "bundle:lib": "webpack --mode=production && npm run declarations",
     "bundle:browser": "webpack --env production --env browser --mode=production",
     "bundle": "npm run bundle:clean && npm run bundle:lib && npm run bundle:browser && npm run bundle:standalone",
+    "bundle:working": "npm run bundle:clean && npx webpack --config webpack.working.js && npx webpack --config webpack.standalone.js && npm run declarations",
+    "copy-to-docs": "./scripts/copy-to-docs.sh",
+    "release": "npm run bundle:working && npm run copy-to-docs",
+    "publish:gitpkg": "npm run bundle:working && git add . && git commit -m 'Build bundles for gitpkg' && gitpkg publish",
     "declarations": "tsc --emitDeclarationOnly -p tsconfig.lib.json && cp -R src/types typings/",
     "stats": "webpack --env production --env standalone --json --profile --mode=production > stats.json",
     "prettier": "prettier --write \"src/**/*.{ts,tsx}\"",
@@ -119,6 +126,7 @@
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.0",
     "ts-jest": "^29.1.1",
+    "ts-loader": "^9.5.4",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
     "typescript": "^4.9.0",
