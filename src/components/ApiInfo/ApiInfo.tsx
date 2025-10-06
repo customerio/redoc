@@ -14,6 +14,7 @@ import {
   InfoSpanBox,
   InfoSpanBoxWrap,
 } from './styled.elements';
+import { l } from '../../services/Labels';
 
 export interface ApiInfoProps {
   store: AppStore;
@@ -21,24 +22,22 @@ export interface ApiInfoProps {
 
 @observer
 export class ApiInfo extends React.Component<ApiInfoProps> {
-  handleDownloadClick = e => {
-    if (!e.target.href) {
-      e.target.href = this.props.store.spec.info.downloadLink;
-    }
-  };
-
   render() {
     const { store } = this.props;
     const { info, externalDocs } = store.spec;
-    const hideDownloadButton = store.options.hideDownloadButton;
+    const hideDownloadButtons = store.options.hideDownloadButtons;
 
-    const downloadFilename = info.downloadFileName;
-    const downloadLink = info.downloadLink;
-
+    const downloadUrls = info.downloadUrls;
+    const downloadFileName = info.downloadFileName;
     const license =
       (info.license && (
         <InfoSpan>
-          License: <a href={info.license.url}>{info.license.name}</a>
+          License:{' '}
+          {info.license.identifier ? (
+            info.license.identifier
+          ) : (
+            <a href={info.license.url}>{info.license.name}</a>
+          )}
         </InfoSpan>
       )) ||
       null;
@@ -80,17 +79,22 @@ export class ApiInfo extends React.Component<ApiInfoProps> {
             <ApiHeader>
               {info.title} 
             </ApiHeader>
-            {!hideDownloadButton && (
+            {!hideDownloadButtons && (
               <p>
-                Download OpenAPI specification:
-                <DownloadButton
-                  download={downloadFilename || true}
-                  target="_blank"
-                  href={downloadLink}
-                  onClick={this.handleDownloadClick}
-                >
-                  Download
-                </DownloadButton>
+                {l('downloadSpecification')}:
+                {downloadUrls?.map(({ title, url }) => {
+                  return (
+                    <DownloadButton
+                      download={downloadFileName || true}
+                      target="_blank"
+                      href={url}
+                      rel="noreferrer"
+                      key={url}
+                    >
+                      {title}
+                    </DownloadButton>
+                  );
+                })}
               </p>
             )}
             <StyledMarkdownBlock>
@@ -103,6 +107,7 @@ export class ApiInfo extends React.Component<ApiInfoProps> {
               )) ||
                 null}
             </StyledMarkdownBlock>
+            <Markdown source={store.spec.info.summary} data-role="redoc-summary" />
             <Markdown source={store.spec.info.description} data-role="redoc-description" />
             {externalDocs && <ExternalDocumentation externalDocs={externalDocs} />}
           </MiddlePanel>

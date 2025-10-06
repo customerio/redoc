@@ -2,6 +2,7 @@
 
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
+import { act } from 'react';
 
 import { JsonViewer } from '../';
 import { withTheme } from '../testProviders';
@@ -41,6 +42,63 @@ describe('Components', () => {
       copy.simulate('click');
 
       expect(ClipboardService.copySelected as jest.Mock).toHaveBeenCalled();
+    });
+
+    test('Expand/Collapse buttons disappears for flat structures', () => {
+      const flatData = { a: 1, b: '2', c: null };
+      const flatDataComponent = mount(withTheme(<JsonViewer data={flatData} />));
+
+      expect(flatDataComponent.html()).not.toContain('Expand all');
+      expect(flatDataComponent.html()).not.toContain('Collapse all');
+    });
+
+    describe('Keyboard Navigation', () => {
+      let component: ReactWrapper;
+      const data = {
+        a: 1,
+        b: {
+          c:
+            // Long string to test horizontal scrolling
+            Array(100).fill('hello').join(''),
+        },
+      };
+
+      beforeEach(() => {
+        component = mount(withTheme(<JsonViewer data={data} />));
+        ClipboardService.copySelected = origCopySelected;
+      });
+
+      test('should handle arrow key navigation', () => {
+        const prismDiv = component.find('div[tabIndex=0]');
+        const divElement = prismDiv.getDOMNode();
+
+        // Mock scrollLeft before events
+        Object.defineProperty(divElement, 'scrollLeft', {
+          get: jest.fn(() => 0),
+          set: jest.fn(),
+        });
+
+        // Trigger events inside act()
+        act(() => {
+          divElement.dispatchEvent(
+            new KeyboardEvent('keydown', {
+              key: 'ArrowRight',
+              bubbles: true,
+            }),
+          );
+        });
+
+        act(() => {
+          divElement.dispatchEvent(
+            new KeyboardEvent('keydown', {
+              key: 'ArrowLeft',
+              bubbles: true,
+            }),
+          );
+        });
+
+        expect(divElement.scrollLeft).toBe(0);
+      });
     });
   });
 });

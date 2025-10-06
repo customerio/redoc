@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DropdownOrLabel } from '../DropdownOrLabel/DropdownOrLabel';
+import { DropdownOrLabel, DropdownOrLabelProps } from '../DropdownOrLabel/DropdownOrLabel';
 import { ParametersGroup } from './ParametersGroup';
 
 import { UnderlinedHeader } from '../../common-elements';
@@ -10,6 +10,9 @@ import { MediaTypesSwitch } from '../MediaTypeSwitch/MediaTypesSwitch';
 import { Schema } from '../Schema';
 
 import { Markdown } from '../Markdown/Markdown';
+import { ConstraintsView } from '../Fields/FieldConstraints';
+import { RequiredLabel } from '../../common-elements/fields';
+import styled from '../../styled-components';
 
 function safePush(obj, prop, item) {
   if (!obj[prop]) {
@@ -48,37 +51,85 @@ export class Parameters extends React.PureComponent<ParametersProps> {
 
     const bodyDescription = body && body.description;
 
+    const bodyRequired = body && body.required;
+
     return (
       <>
         {paramsPlaces.map(place => (
           <ParametersGroup key={place} place={place} parameters={paramsMap[place]} />
         ))}
-        {bodyContent && <BodyContent content={bodyContent} description={bodyDescription} />}
+        {bodyContent && (
+          <BodyContent
+            content={bodyContent}
+            description={bodyDescription}
+            bodyRequired={bodyRequired}
+          />
+        )}
       </>
     );
   }
 }
 
-function DropdownWithinHeader(props) {
+function DropdownWithinHeader({
+  bodyRequired,
+  ...props
+}: DropdownOrLabelProps & { bodyRequired?: boolean }) {
+  const isRequired = typeof bodyRequired === 'boolean' && !!bodyRequired;
+  const isOptional = typeof bodyRequired === 'boolean' && !bodyRequired;
+
   return (
     <UnderlinedHeader key="header">
-      Request Body: <DropdownOrLabel {...props} />
+      Request Body schema: <DropdownOrLabel {...props} />
+      {isRequired && <RequiredBody>required</RequiredBody>}
+      {isOptional && <OptionalBody>optional</OptionalBody>}
     </UnderlinedHeader>
   );
 }
 
-export function BodyContent(props: { content: MediaContentModel; description?: string }): JSX.Element {
-  const { content, description } = props;
+export function BodyContent(props: {
+  content: MediaContentModel;
+  description?: string;
+  bodyRequired?: boolean;
+}): JSX.Element {
+  const { content, description, bodyRequired } = props;
+  const { isRequestType } = content;
   return (
-    <MediaTypesSwitch content={content} renderDropdown={DropdownWithinHeader}>
+    <MediaTypesSwitch
+      content={content}
+      renderDropdown={props => <DropdownWithinHeader bodyRequired={bodyRequired} {...props} />}
+    >
       {({ schema }) => {
         return (
           <>
             {description !== undefined && <Markdown source={description} />}
-            <Schema skipReadOnly={true} key="schema" schema={schema} />
+            {schema?.type === 'object' && (
+              <ConstraintsView constraints={schema?.constraints || []} />
+            )}
+            <Schema
+              skipReadOnly={isRequestType}
+              skipWriteOnly={!isRequestType}
+              key="schema"
+              schema={schema}
+            />
           </>
         );
       }}
     </MediaTypesSwitch>
   );
 }
+
+const commonStyles = `
+  text-transform: lowercase;
+  margin-left: 0;
+  line-height: 1.5em;
+`;
+
+const RequiredBody = styled(RequiredLabel)`
+  ${commonStyles}
+`;
+
+const OptionalBody = styled('div')`
+  ${commonStyles}
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: ${props => props.theme.schema.labelsTextSize};
+`;

@@ -6,6 +6,7 @@ import { SourceCodeWithCopy } from '../SourceCode/SourceCode';
 
 import { RightPanelHeader, Tab, TabList, TabPanel, Tabs } from '../../common-elements';
 import { OptionsContext } from '../OptionsProvider';
+import { l } from '../../services/Labels';
 
 export interface RequestSamplesProps {
   operation: OperationModel;
@@ -26,18 +27,13 @@ export class RequestSamples extends React.Component<RequestSamplesProps> {
     return (
       (hasSamples && (
         <div>
-          <RightPanelHeader> Request samples </RightPanelHeader>
+          <RightPanelHeader> {l('requestSamples')} </RightPanelHeader>
+
           <Tabs defaultIndex={0}>
             <TabList hidden={hideTabList}>
               {samples.map(sample => (
-                <Tab className='exampleButton' key={sample.lang + '_' + (sample.label || '')}>
-                  {sample.label !== undefined ? sample.label : 
-                  sample.lang.toLowerCase().includes("curl") ? 'cURL' : 
-                  sample.lang.toLowerCase().includes("node") ? 'Node.js' :
-                  sample.lang.toLowerCase().includes("go") ? 'Go' :
-                  sample.lang.toLowerCase().includes("ruby") ? 'Ruby' : 
-                  sample.lang.toLowerCase().includes("python") ? 'Python 3' : 
-                  sample.lang.toLowerCase().includes("javascript") ? 'Javascript' : sample.lang}
+                <Tab key={sample.lang + '_' + (sample.label || '')}>
+                  {sample.label !== undefined ? sample.label : sample.lang}
                 </Tab>
               ))}
             </TabList>

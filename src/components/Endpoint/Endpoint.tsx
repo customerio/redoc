@@ -48,9 +48,9 @@ export class Endpoint extends React.Component<EndpointProps, EndpointState> {
     return (
       <OptionsContext.Consumer>
         {options => (
-          <OperationEndpointWrap className='endpoint'>
-            <EndpointInfo onClick={this.toggle} expanded={expanded} inverted={inverted}>
-              <HttpVerb type={operation.httpVerb} compact={this.props.compact}>
+          <OperationEndpointWrap>
+            <EndpointInfo onClick={this.toggle} $expanded={expanded} $inverted={inverted}>
+              <HttpVerb type={operation.httpVerb} $compact={this.props.compact}>
                 {operation.httpVerb}
               </HttpVerb>
               <ServerRelativeURL className='path'>{operation.path}</ServerRelativeURL>
@@ -62,7 +62,7 @@ export class Endpoint extends React.Component<EndpointProps, EndpointState> {
                 style={{ marginRight: '-25px' }}
               />
             </EndpointInfo>
-            <ServersOverlay expanded={expanded} aria-hidden={!expanded}>
+            <ServersOverlay $expanded={expanded} aria-hidden={!expanded}>
               {operation.servers.map(server => {
                 const normalizedUrl = options.expandDefaultServerVariables
                   ? expandDefaultServerVariables(server.url, server.variables)

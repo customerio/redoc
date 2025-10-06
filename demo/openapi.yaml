@@ -16,14 +16,14 @@ info:
     [Petstore sample](http://petstore.swagger.io/) provided by [swagger.io](http://swagger.io) team.
     It was **extended** to illustrate features of [generator-openapi-repo](https://github.com/Rebilly/generator-openapi-repo)
     tool and [ReDoc](https://github.com/Redocly/redoc) documentation. In addition to standard
-    OpenAPI syntax we use a few [vendor extensions](https://github.com/Redocly/redoc/blob/master/docs/redoc-vendor-extensions.md).
+    OpenAPI syntax we use a few [vendor extensions](https://github.com/Redocly/redoc/blob/main/docs/redoc-vendor-extensions.md).
 
     # OpenAPI Specification
     This API is documented in **OpenAPI format** and is based on
     [Petstore sample](http://petstore.swagger.io/) provided by [swagger.io](http://swagger.io) team.
     It was **extended** to illustrate features of [generator-openapi-repo](https://github.com/Rebilly/generator-openapi-repo)
     tool and [ReDoc](https://github.com/Redocly/redoc) documentation. In addition to standard
-    OpenAPI syntax we use a few [vendor extensions](https://github.com/Redocly/redoc/blob/master/docs/redoc-vendor-extensions.md).
+    OpenAPI syntax we use a few [vendor extensions](https://github.com/Redocly/redoc/blob/main/docs/redoc-vendor-extensions.md).
 
     # Cross-Origin Resource Sharing
     This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/).
@@ -38,7 +38,7 @@ info:
     OAuth2 - an open protocol to allow secure authorization in a simple
     and standard method from web, mobile and desktop applications.
 
-    <SecurityDefinitions />
+    <!-- ReDoc-Inject: <security-definitions> -->
 
   version: 1.0.0
   title: Swagger Petstore
@@ -83,6 +83,8 @@ x-tagGroups:
     tags:
       - pet_model
       - store_model
+security:
+  - {}
 paths:
   /pet:
     servers:
@@ -92,7 +94,7 @@ paths:
     parameters:
       - name: Accept-Language
         in: header
-        description: "The language you prefer for messages. Supported values are en-AU, en-CA, en-GB, en-US"
+        description: 'The language you prefer for messages. Supported values are en-AU, en-CA, en-GB, en-US'
         example: en-US
         required: false
         schema:
@@ -108,6 +110,10 @@ paths:
     post:
       tags:
         - pet
+      x-badges:
+        - name: 'Beta'
+          position: before
+          color: purple
       summary: Add a new pet to the store
       description: Add new pet to the store inventory.
       operationId: addPet
@@ -207,6 +213,9 @@ paths:
     put:
       tags:
         - pet
+      x-badges:
+        - name: 'Alpha'
+          color: purple
       summary: Update an existing pet
       description: ''
       operationId: updatePet
@@ -240,6 +249,8 @@ paths:
     get:
       tags:
         - pet
+      x-badges:
+        - name: 'Gamma'
       summary: Find pet by ID
       description: Returns a single pet
       operationId: getPetById
@@ -320,7 +331,7 @@ paths:
           required: false
           schema:
             type: string
-          example: "Bearer <TOKEN>"
+          example: 'Bearer <TOKEN>'
         - name: petId
           in: path
           description: Pet id to delete
@@ -443,7 +454,9 @@ paths:
             application/xml:
               schema:
                 type: array
+                maxItems: 999
                 items:
+                  maxItems: 111
                   $ref: '#/components/schemas/Pet'
         '400':
           description: Invalid tag value
@@ -465,6 +478,7 @@ paths:
             application/json:
               schema:
                 type: object
+                minProperties: 2
                 additionalProperties:
                   type: integer
                   format: int32
@@ -493,7 +507,7 @@ paths:
             application/json:
               example:
                 status: 400
-                message: "Invalid Order"
+                message: 'Invalid Order'
       requestBody:
         content:
           application/json:
@@ -941,11 +955,11 @@ paths:
                 type: string
               examples:
                 response:
-                  value:  <Message> OK </Message>
+                  value: <Message> OK </Message>
             text/plain:
               examples:
                 response:
-                  value:  OK
+                  value: OK
         '400':
           description: Invalid username/password supplied
   /user/logout:
@@ -971,6 +985,7 @@ components:
         message:
           type: string
     Cat:
+      'x-tags': ['pet']
       description: A representation of a cat
       allOf:
         - $ref: '#/components/schemas/Pet'
@@ -1091,8 +1106,8 @@ components:
       properties:
         id:
           externalDocs:
-            description: "Find more info here"
-            url: "https://example.com"
+            description: 'Find more info here'
+            url: 'https://example.com'
           description: Pet ID
           allOf:
             - $ref: '#/components/schemas/Id'
@@ -1107,6 +1122,7 @@ components:
         photoUrls:
           description: The list of URL to a cute photos featuring pet
           type: array
+          default: []
           maxItems: 20
           xml:
             name: photoUrl
@@ -1133,6 +1149,10 @@ components:
             - available
             - pending
             - sold
+          x-enumDescriptions:
+            available: Available status
+            pending: Pending status
+            sold: Sold status
         petType:
           description: Type of a pet
           type: string
@@ -1198,6 +1218,26 @@ components:
           description: User status
           type: integer
           format: int32
+        addresses:
+          type: array
+          minItems: 0
+          maxLength: 10
+          items:
+            - type: object
+              properties:
+                city:
+                  type: string
+                  minLength: 0
+                country:
+                  type: string
+                  minLength: 0
+                street:
+                  description: includes build/apartment number
+                  type: string
+                  minLength: 0
+            - type: number
+          additionalItems:
+            type: string
       xml:
         name: User
   requestBodies:
@@ -1216,6 +1256,7 @@ components:
               name:
                 type: string
                 description: hooray
+                default: []
       description: Pet object that needs to be added to the store
       required: true
     UserArray:
@@ -1259,13 +1300,13 @@ x-webhooks:
       summary: New pet
       description: Information about a new pet in the systems
       operationId: newPet
-      tags: 
+      tags:
         - pet
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Pet"
+              $ref: '#/components/schemas/Pet'
       responses:
-        "200":
+        '200':
           description: Return a 200 status to indicate that the data was received successfully

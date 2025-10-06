@@ -6,8 +6,8 @@
 import * as React from 'react';
 import styled from '../src/styled-components';
 
-const DropDownItem = styled.li<{ active?: boolean }>`
-  ${(props: any) => (props.active ? 'background-color: #eee' : '')};
+const DropDownItem = styled.li<{ $active?: boolean }>`
+  ${(props: any) => (props.$active ? 'background-color: #eee' : '')};
   padding: 13px 16px;
   &:hover {
     background-color: #eee;
@@ -31,7 +31,7 @@ const DropDownList = styled.ul`
   list-style: none;
   margin: 4px 0 0 0;
   padding: 5px 0;
-  font-family: 'Lato';
+  font-family: Roboto, sans-serif;
   overflow: hidden;
 `;
 
@@ -183,7 +183,7 @@ export default class ComboBox extends React.Component<ComboBoxProps, ComboBoxSta
   renderOption = (option: { value: string; label: string }, idx: number) => {
     return (
       <DropDownItem
-        active={idx === this.state.activeItemIdx}
+        $active={idx === this.state.activeItemIdx}
         key={option.value}
         // tslint:disable-next-line
         onMouseDown={() => {
@@ -211,6 +211,7 @@ export default class ComboBox extends React.Component<ComboBoxProps, ComboBoxSta
           onFocus={this.open}
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyPress}
+          aria-label="URL to an OpenAPI definition to try"
         />
         <Button onClick={this.handleTryItClick}> TRY IT </Button>
         {open && <DropDownList>{options.map(this.renderOption)}</DropDownList>}

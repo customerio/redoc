@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
-import defaultTheme from '../theme';
+import defaultTheme, { resolveTheme } from '../theme';
 
-export default class TestThemeProvider extends React.Component {
+import { PropsWithChildren } from 'react';
+
+export default class TestThemeProvider extends React.Component<PropsWithChildren<any>> {
   render() {
     return (
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={resolveTheme(defaultTheme)}>
         {React.Children.only(this.props.children as any)}
       </ThemeProvider>
     );

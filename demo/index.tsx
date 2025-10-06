@@ -1,26 +1,28 @@
 import * as React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import styled from 'styled-components';
-import { resolve as urlResolve } from 'url';
 import { RedocStandalone } from '../src';
 import ComboBox from './ComboBox';
+import FileInput from './components/FileInput';
+
+const DEFAULT_SPEC = 'museum.yaml';
+const NEW_VERSION_PETSTORE = 'openapi-3-1.yaml';
 
 const demos = [
+  { value: DEFAULT_SPEC, label: 'Museum API' },
+  { value: NEW_VERSION_PETSTORE, label: 'Petstore OpenAPI 3.1' },
   { value: 'https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.yaml', label: 'Instagram' },
   {
     value: 'https://api.apis.guru/v2/specs/googleapis.com/calendar/v3/openapi.yaml',
     label: 'Google Calendar',
   },
-  { value: 'https://api.apis.guru/v2/specs/slack.com/1.5.0/openapi.yaml', label: 'Slack' },
-  { value: 'https://api.apis.guru/v2/specs/zoom.us/2.0.0/swagger.yaml', label: 'Zoom.us' },
-  { value: 'https://docs.graphhopper.com/openapi.json', label: 'GraphHopper' },
+  { value: 'https://api.apis.guru/v2/specs/slack.com/1.7.0/openapi.yaml', label: 'Slack' },
+  { value: 'https://api.apis.guru/v2/specs/zoom.us/2.0.0/openapi.yaml', label: 'Zoom.us' },
 ];
 
-const DEFAULT_SPEC = 'openapi.yaml';
-
 class DemoApp extends React.Component<
-  {},
-  { specUrl: string; dropdownOpen: boolean; cors: boolean }
+  Record<string, unknown>,
+  { spec: object | undefined; specUrl: string; dropdownOpen: boolean; cors: boolean }
 > {
   constructor(props) {
     super(props);
@@ -38,13 +40,25 @@ class DemoApp extends React.Component<
     }
 
     this.state = {
+      spec: undefined,
       specUrl: url,
       dropdownOpen: false,
       cors,
     };
   }
 
+  handleUploadFile = (spec: object) => {
+    this.setState({
+      spec,
+      specUrl: '',
+    });
+  };
+
   handleChange = (url: string) => {
+    if (url === NEW_VERSION_PETSTORE) {
+      this.setState({ cors: false });
+      0;
+    }
     this.setState({
       specUrl: url,
     });
@@ -72,16 +86,20 @@ class DemoApp extends React.Component<
     let proxiedUrl = specUrl;
     if (specUrl !== DEFAULT_SPEC) {
       proxiedUrl = cors
-        ? '\\\\cors.apis.guru/' + urlResolve(window.location.href, specUrl)
+        ? 'https://cors.redoc.ly/' + new URL(specUrl, window.location.href).href
         : specUrl;
     }
     return (
       <>
         <Heading>
           <a href=".">
-            <Logo src="https://github.com/Redocly/redoc/raw/master/docs/images/redoc-logo.png" />
+            <Logo
+              src="https://github.com/Redocly/redoc/raw/main/docs/images/redoc.png"
+              alt="Redoc logo"
+            />
           </a>
           <ControlsContainer>
+            <FileInput onUpload={this.handleUploadFile} />
             <ComboBox
               placeholder={'URL to a spec to try'}
               options={demos}
@@ -102,8 +120,9 @@ class DemoApp extends React.Component<
           />
         </Heading>
         <RedocStandalone
+          spec={this.state.spec}
           specUrl={proxiedUrl}
-          options={{ scrollYOffset: 'nav', untrustedSpec: true }}
+          options={{ scrollYOffset: 'nav', sanitize: true }}
         />
       </>
     );
@@ -146,7 +165,7 @@ const Heading = styled.nav`
 
   display: flex;
   align-items: center;
-  font-family: 'Lato';
+  font-family: Roboto, sans-serif;
 `;
 
 const Logo = styled.img`
@@ -160,7 +179,9 @@ const Logo = styled.img`
   }
 `;
 
-render(<DemoApp />, document.getElementById('container'));
+const container = document.getElementById('container');
+const root = createRoot(container!);
+root.render(<DemoApp />);
 
 /* ====== Helpers ====== */
 function updateQueryStringParameter(uri, key, value) {
