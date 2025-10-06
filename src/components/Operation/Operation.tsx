@@ -45,7 +45,11 @@ export const Operation = observer(({ operation }: OperationProps): JSX.Element =
   return (
     <OptionsContext.Consumer>
       {options => (
-        <Row {...{ [SECTION_ATTR]: operation.operationHash }} id={operation.operationHash}>
+        <Row
+          {...{ [SECTION_ATTR]: operation.operationHash }}
+          id={operation.operationHash}
+          className="opContent"
+        >
           <MiddlePanel>
             <H2>
               <ShareLink to={operation.id} />
