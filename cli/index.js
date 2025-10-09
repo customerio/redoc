@@ -291,7 +291,7 @@ function getPageHTML(
       redocHead: ssr
         ? (cdn
             ? '<script src="https://unpkg.com/redoc@next/bundles/redoc.standalone.js"></script>'
-            : `<script>${redocStandaloneSrc}</script>`) + css
+            : `<script>${sanitizeJSONString(redocStandaloneSrc.toString())}</script>`) + css
         : '<script src="redoc.standalone.js"></script>',
       title: title || spec.info.title || 'ReDoc documentation',
       disableGoogleFont,
