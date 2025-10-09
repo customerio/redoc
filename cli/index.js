@@ -291,7 +291,7 @@ function getPageHTML(
       redocHead: ssr
         ? (cdn
             ? '<script src="https://unpkg.com/redoc@next/bundles/redoc.standalone.js"></script>'
-            : `<script>${sanitizeJSONString(redocStandaloneSrc.toString())}</script>`) + css
+            : `<script>${sanitizeJavaScript(redocStandaloneSrc.toString())}</script>`) + css
         : '<script src="redoc.standalone.js"></script>',
       title: title || spec.info.title || 'ReDoc documentation',
       disableGoogleFont,
@@ -339,6 +339,11 @@ function isURL(str) {
 }
 function sanitizeJSONString(str) {
   return escapeClosingScriptTag(escapeUnicode(str));
+}
+function sanitizeJavaScript(str) {
+  // Only escape closing script tags in JavaScript source code
+  // Don't escape Unicode characters as they're valid in JS
+  return escapeClosingScriptTag(str);
 }
 // see http://www.thespanner.co.uk/2011/07/25/the-json-specification-is-now-wrong/
 function escapeClosingScriptTag(str) {
