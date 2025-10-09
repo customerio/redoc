@@ -281,10 +281,12 @@ function getPageHTML(
     ${(ssr && `const __redoc_state = ${sanitizeJSONString(JSON.stringify(state))};`) || ''}
 
     var container = document.getElementById('redoc');
-    Redoc.${
+    ${
       ssr
-        ? 'hydrate(__redoc_state, container);'
-        : `init("spec.json", ${JSON.stringify(redocOptions)}, container)`
+        ? '(typeof Redoc !== "undefined" ? Redoc : RedocStandalone).hydrate(__redoc_state, container);'
+        : `(typeof Redoc !== "undefined" ? Redoc : RedocStandalone).init("spec.json", ${JSON.stringify(
+            redocOptions,
+          )}, container)`
     };
 
     </script>`,
