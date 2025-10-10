@@ -262,7 +262,13 @@ function getPageHTML(
       const store = yield redoc_1.createStore(spec, specUrl, redocOptions);
       const sheet = new styled_components_1.ServerStyleSheet();
       html = server_1.renderToString(
-        sheet.collectStyles(React.createElement(redoc_1.Redoc, { store })),
+        sheet.collectStyles(
+          React.createElement(
+            styled_components_1.StyleSheetManager,
+            { disableVendorPrefixes: true },
+            React.createElement(redoc_1.Redoc, { store }),
+          ),
+        ),
       );
       css = sheet.getStyleTags();
       state = yield store.toJS();
@@ -283,10 +289,12 @@ function getPageHTML(
     var container = document.getElementById('redoc');
     ${
       ssr
-        ? '(typeof Redoc !== "undefined" ? Redoc : RedocStandalone).hydrate(__redoc_state, container);'
-        : `(typeof Redoc !== "undefined" ? Redoc : RedocStandalone).init("spec.json", ${JSON.stringify(
+        ? 'if (typeof window.RedocStandalone !== "undefined") { window.RedocStandalone.hydrate(__redoc_state, container); } else if (typeof window.Redoc !== "undefined") { window.Redoc.hydrate(__redoc_state, container); } else { console.error("ReDoc not found on window object"); }'
+        : `if (typeof window.RedocStandalone !== "undefined") { window.RedocStandalone.init("spec.json", ${JSON.stringify(
             redocOptions,
-          )}, container)`
+          )}, container); } else if (typeof window.Redoc !== "undefined") { window.Redoc.init("spec.json", ${JSON.stringify(
+            redocOptions,
+          )}, container); } else { console.error("ReDoc not found on window object"); }`
     };
 
     </script>`,

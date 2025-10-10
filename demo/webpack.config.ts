@@ -1,14 +1,19 @@
-import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import { resolve } from 'path';
-import * as webpack from 'webpack';
-import { webpackIgnore } from '../config/webpack-utils.js';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
 
-const VERSION = JSON.stringify(require('../package.json').version);
-const REVISION = JSON.stringify(
-  require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
-);
+function webpackIgnore(regexp) {
+  return new webpack.NormalModuleReplacementPlugin(regexp, 'lodash.noop');
+}
+
+const VERSION = JSON.stringify('2.5.1');
+const REVISION = JSON.stringify('main');
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 function root(filename) {
   return resolve(__dirname + '/' + filename);
@@ -45,8 +50,8 @@ export default (env: { playground?: boolean; bench?: boolean } = {}) => ({
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
     fallback: {
-      path: require.resolve('path-browserify'),
-      buffer: require.resolve('buffer'),
+      path: 'path-browserify',
+      buffer: 'buffer',
       http: false,
       fs: false,
       os: false,
@@ -71,7 +76,35 @@ export default (env: { playground?: boolean; bench?: boolean } = {}) => ({
         loader: 'esbuild-loader',
         options: {
           target: 'es2015',
-          tsconfigRaw: require('../tsconfig.json'),
+          tsconfigRaw: {
+            compilerOptions: {
+              experimentalDecorators: true,
+              moduleResolution: 'node',
+              target: 'es5',
+              noImplicitAny: false,
+              noUnusedParameters: true,
+              noUnusedLocals: true,
+              strictNullChecks: true,
+              sourceMap: true,
+              declaration: true,
+              noEmitHelpers: true,
+              importHelpers: true,
+              outDir: 'lib',
+              pretty: true,
+              lib: ['es2015', 'es2016', 'es2017', 'dom', 'WebWorker.ImportScripts'],
+              jsx: 'react',
+              types: ['webpack', 'webpack-env', 'jest'],
+            },
+            compileOnSave: false,
+            exclude: ['node_modules', '.tmp', 'lib', 'e2e/**'],
+            include: [
+              './custom.d.ts',
+              './demo/playground/hmr-playground.tsx',
+              './src/**/*.ts?',
+              'demo/*.tsx',
+              'src/empty.js',
+            ],
+          },
         },
         exclude: [/node_modules/],
       },

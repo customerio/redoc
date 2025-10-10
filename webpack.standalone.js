@@ -3,43 +3,48 @@ const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/standalone.tsx',
   output: {
     path: path.resolve(__dirname, 'bundles'),
     filename: 'redoc.standalone.js',
     library: 'RedocStandalone',
     libraryTarget: 'umd',
-    globalObject: 'this'
+    globalObject: 'typeof self !== "undefined" ? self : this',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     fallback: {
-      "path": require.resolve("path-browserify"),
-      "fs": false,
-      "http": false
-    }
+      path: require.resolve('path-browserify'),
+      fs: false,
+      http: false,
+    },
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
     new webpack.DefinePlugin({
       __REDOC_VERSION__: JSON.stringify(require('./package.json').version),
       __REDOC_REVISION__: JSON.stringify(
-        require('child_process').execSync('git rev-parse --short HEAD').toString().trim()
-      )
-    })
-  ]
+        require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
+      ),
+      'process.env': JSON.stringify({}),
+      'process.browser': JSON.stringify(true),
+      'process.version': JSON.stringify(''),
+      'process.versions': JSON.stringify({}),
+      'process.platform': JSON.stringify('browser'),
+    }),
+  ],
 };

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { configure } from 'mobx';
+import { StyleSheetManager } from 'styled-components';
 
 import { Redoc, RedocStandalone } from './components/';
 import { AppStore } from './services/AppStore';
@@ -61,16 +62,18 @@ export function init(
 
   const root = createRoot(element!);
   root.render(
-    React.createElement(
-      RedocStandalone,
-      {
-        spec,
-        onLoaded: callback,
-        specUrl,
-        options: { ...options, ...parseOptionsFromElement(element) },
-      },
-      ['Loading...'],
-    ),
+    <StyleSheetManager disableVendorPrefixes>
+      {React.createElement(
+        RedocStandalone,
+        {
+          spec,
+          onLoaded: callback,
+          specUrl,
+          options: { ...options, ...parseOptionsFromElement(element) },
+        },
+        ['Loading...'],
+      )}
+    </StyleSheetManager>,
   );
 }
 
@@ -89,21 +92,32 @@ export function hydrate(
   const store = AppStore.fromJS(state);
   debugTimeEnd('Redoc create store');
 
-  setTimeout(() => {
-    debugTime('Redoc hydrate');
-    hydrateRoot(element!, <Redoc store={store} />, { onRecoverableError: callback });
-    debugTimeEnd('Redoc hydrate');
-  }, 0);
+  debugTime('Redoc hydrate');
+  hydrateRoot(
+    element!,
+    <StyleSheetManager disableVendorPrefixes>
+      <Redoc store={store} />
+    </StyleSheetManager>,
+    { onRecoverableError: callback },
+  );
+  debugTimeEnd('Redoc hydrate');
 }
 
 /**
  * autoinit ReDoc if <redoc> tag is found on the page with "spec-url" attr
+ * Skip if element already has content (SSR case)
  */
 function autoInit() {
   const element = querySelector('redoc');
   if (!element) {
     return;
   }
+
+  // Skip autoInit if element already has content (SSR case)
+  if (element.children.length > 0) {
+    return;
+  }
+
   const specUrl = element.getAttribute('spec-url');
   if (specUrl) {
     init(specUrl, {}, element);
